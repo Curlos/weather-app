@@ -1,25 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import {fetchCurrentWeatherData} from './api/';
-
-console.log(process.env)
+import CityInput from './components/CityInput/CityInput'
 
 const App = () => {
 
-  const [weather, setWeather] = useState({})
+  const [city, setCity] = useState('')
+  const [finalCity, setFinalCity] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
-      const currentWeather = await fetchCurrentWeatherData('miami');
-      setWeather(currentWeather)
+    const fetchAPI = async () => {
+      const weatherData = await fetchCurrentWeatherData(finalCity);
+      console.log(weatherData)
+      return weatherData
     }
 
-    fetchData()
-  }, [setWeather])
+    fetchAPI()
+  }, [finalCity])
 
-  console.log(weather)
+  const handleCityChange = (newCity) => {
+    setCity(newCity)
+  }
+
   return(
     <div>
-      {JSON.stringify(weather)}
+      <CityInput handleCityChange={handleCityChange} city={city} setFinalCity={setFinalCity}/>
+      <WeatherInfo />
     </div>
   )
 }
