@@ -18,7 +18,7 @@ export const fetchCurrentWeatherData = async (city) => {
 
 export const fetchForecast = async (city) => {
 
-  let currentWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+  let currentWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
 
   try {
     const response = await axios.get(currentWeatherUrl)
