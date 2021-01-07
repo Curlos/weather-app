@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
-import {Tabs, Tab, Sonnet} from 'react-bootstrap'
+import {Tabs, Tab, Table} from 'react-bootstrap'
 
 const kelvinToFarenheit = (tempKelvin) => {
   return (Math.round((tempKelvin - 273.15) * (9/5) + 32))
@@ -16,9 +16,18 @@ const WeatherInfo = ({cityInfo, forecast}) => {
     return null;
   }
 
+  /*
+
+  <div>Farenheit: {kelvinToFarenheit(day.main.temp)}</div>
+                  <div>Celsius: {kelvinToCelsius(day.main.temp)}</div>
+                  */
+
   const icon = cityInfo.weather[0].icon
 
+  console.log('City Info: ')
   console.log(cityInfo)
+  console.log('Forecast: ')
+  console.log(forecast)
 
   return (
     <div>
@@ -32,17 +41,19 @@ const WeatherInfo = ({cityInfo, forecast}) => {
             </div>
         </Tab>
         <Tab eventKey="forecast" title="Forecast">
-          {forecast.list.map((day, i) => {
-            if(i % 8 === 0) {
-              return (
-                <div>
-                  <div>Farenheit: {kelvinToFarenheit(day.main.temp)}</div>
-                  <div>Celsius: {kelvinToCelsius(day.main.temp)}</div>
-                </div>
-              )
-
-            }
-          })}
+          <Table striped bordered hover>
+          <ul>
+            {forecast.list.map((day, i) => {
+                console.log('day')
+                console.log(day)
+                return (
+                    <li key={i}>
+                      {day.dt_txt}, <b>Temperature: </b> {kelvinToFarenheit(day.main.temp)} ℉ <b>Weather: </b> {day.weather[0].main} ({day.weather[0].description}) <img src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt='alt'/>
+                    </li>
+                )
+            })}
+          </ul>
+          </Table>
         </Tab>
       </Tabs>
     </div>

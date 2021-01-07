@@ -3,9 +3,6 @@ import {fetchCurrentWeatherData} from '../../api'
 import { Button, Input } from '@material-ui/core';
 
 const CityInput = ({handleCityChange, city, setFinalCity}) => {
-
- 
-
   return (
     <div>
       <Input onChange={(e) => handleCityChange(e.target.value)}></Input>
