@@ -12,9 +12,9 @@ const kelvinToCelsius = (tempKelvin) => {
   return (Math.round(tempKelvin - 273.15))
 }
 
-const WeatherInfo = ({cityInfo, forecast}) => {
+const WeatherInfo = ({locationInfo, forecast}) => {
 
-  if(!cityInfo || !forecast) {
+  if(!locationInfo || !forecast) {
     return null;
   }
 
@@ -24,10 +24,10 @@ const WeatherInfo = ({cityInfo, forecast}) => {
                   <div>Celsius: {kelvinToCelsius(day.main.temp)}</div>
                   */
 
-  const icon = cityInfo.weather[0].icon
+  const icon = locationInfo.weather[0].icon
 
-  console.log('City Info: ')
-  console.log(cityInfo)
+  console.log('Location Info: ')
+  console.log(locationInfo)
   console.log('Forecast: ')
   console.log(forecast)
 
@@ -57,7 +57,7 @@ const WeatherInfo = ({cityInfo, forecast}) => {
         <Tab eventKey="current" title="Current Weather">
         
           <div>
-              <b>Location: </b>{cityInfo.name} <b>Temperature: </b> {kelvinToFarenheit(cityInfo.main.temp)} ℉ <b>Weather: </b> {cityInfo.weather[0].main} ({cityInfo.weather[0].description}) <img src={`http://openweathermap.org/img/wn/${cityInfo.weather[0].icon}@2x.png`} alt='alt'/>
+              <b>Location: </b>{locationInfo.name} <b>Temperature: </b> {kelvinToFarenheit(locationInfo.main.temp)} ℉ <b>Weather: </b> {locationInfo.weather[0].main} ({locationInfo.weather[0].description}) <img src={`http://openweathermap.org/img/wn/${locationInfo.weather[0].icon}@2x.png`} alt='alt'/>
           </div>
         </Tab>
         <Tab eventKey="forecast" title="Forecast">
